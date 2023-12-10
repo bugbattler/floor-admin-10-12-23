@@ -92,7 +92,10 @@ const Products = () => {
     if (Object.keys(err).length == 0) {
       {
         axios
-          .post("http://174.138.112.6/api/product/create", data)
+          .post(
+            "https://backend-floor-10-12-23.vercel.app/api/product/create",
+            data
+          )
           .then((response) => {
             const products = response.data;
             console.log(77, products.product._id);
@@ -116,7 +119,10 @@ const Products = () => {
       formData.append(`productPictures`, file);
     });
     axios
-      .put(`http://174.138.112.6/api/product/files/${id}`, formData)
+      .put(
+        `https://backend-floor-10-12-23.vercel.app/api/product/files/${id}`,
+        formData
+      )
       .then((res) => {
         console.log("Files", res.data);
       })
@@ -127,7 +133,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get("http://174.138.112.6/api/category/get")
+      .get("https://backend-floor-10-12-23.vercel.app/api/category/get")
       .then((res) => {
         const response = res.data.categories;
         setAllCatData(response);
@@ -139,7 +145,7 @@ const Products = () => {
       });
 
     axios
-      .get("http://174.138.112.6/api/brand/getAll")
+      .get("https://backend-floor-10-12-23.vercel.app/api/brand/getAll")
       .then((res) => {
         const response = res.data;
         console.log(response);
@@ -300,7 +306,7 @@ const Products = () => {
 
   useEffect(() => {
     axios
-      .get(`http://174.138.112.6/api/product/${id}`)
+      .get(`https://backend-floor-10-12-23.vercel.app/api/product/${id}`)
       .then((res) => {
         const response = res.data.product;
         console.log(278, response);
@@ -367,7 +373,10 @@ const Products = () => {
 
   const updateFormData = (e) => {
     axios
-      .put(`http://174.138.112.6/api/product/update/${id}`, data)
+      .put(
+        `https://backend-floor-10-12-23.vercel.app/api/product/update/${id}`,
+        data
+      )
       .then((res) => {
         const response = res.data;
         uploadProductPic(response._id);
@@ -383,57 +392,55 @@ const Products = () => {
     <>
       <h2 className="mb-5">Product Form</h2>
       <div className="mb-4">
-
-      
-      <select
-        name=""
-        id=""
-        style={{
-          width: "300px",
-          backgroundColor: "#e7e7e7",
-          color: "black",
-        }}
-        onChange={(e)=>{
-          console.log(394,e.target.value)
-          if (e.target.value===`false`) {
-            setSHowBulk(false)
-          }else{
-            setSHowBulk(true)
-          }
-        }}
-        className="btn btn-secondary border-0"
-      >
-        <option style={{ background: "white", color: "black" }} value="">
-          Select Category
-        </option>
-
-        <option
+        <select
+          name=""
+          id=""
           style={{
-            background: "white",
+            width: "300px",
+            backgroundColor: "#e7e7e7",
             color: "black",
-            textAlign: "left",
           }}
-          class="dropdown-item"
-          href="#"
-          value={true}
-          // onChange={(e) => getCat(item._i
-        >
-         Show Bulk Product Upload Form
-        </option>
-        <option
-          style={{
-            background: "white",
-            color: "black",
-            textAlign: "left",
+          onChange={(e) => {
+            console.log(394, e.target.value);
+            if (e.target.value === `false`) {
+              setSHowBulk(false);
+            } else {
+              setSHowBulk(true);
+            }
           }}
-          class="dropdown-item"
-          href="#"
-          value={false}
-          // onChange={(e) => getCat(item._i
+          className="btn btn-secondary border-0"
         >
-         Show Single Product Upload Form
-        </option>
-      </select>
+          <option style={{ background: "white", color: "black" }} value="">
+            Select Category
+          </option>
+
+          <option
+            style={{
+              background: "white",
+              color: "black",
+              textAlign: "left",
+            }}
+            class="dropdown-item"
+            href="#"
+            value={true}
+            // onChange={(e) => getCat(item._i
+          >
+            Show Bulk Product Upload Form
+          </option>
+          <option
+            style={{
+              background: "white",
+              color: "black",
+              textAlign: "left",
+            }}
+            class="dropdown-item"
+            href="#"
+            value={false}
+            // onChange={(e) => getCat(item._i
+          >
+            Show Single Product Upload Form
+          </option>
+        </select>
       </div>
       {ShowBulk ? (
         <>
